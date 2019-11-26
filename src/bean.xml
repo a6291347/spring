@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+        >
+        <!--ioc容器配置  -->
+        <!--1. 使用类的无参数构造方法 -->
+        <!--scope=""singleton 默认单列 相同方法只创建一个对象  prototype 多列 相同方法可创建多个对象 -->
+        <bean id="user" class="com.hzh.ioc.User" scope=""></bean>
+        <!--2.使用静态工厂  -->
+        <!-- <bean id="" class="" factory-method="(静态工厂中的静态方法)"></bean> -->
+        <!--3.使用实例化工厂  -->
+        <!--  <bean id="aa" class="" ></bean> 1.先把实例化工厂加入ioc容器-->
+        <!--  <bean id="" factory-bean="aa" factory-method="工厂方法"></bean>2/将ioc容器中的id给factory-bean
+        -->
+        <!-- 有参注入 -->
+        <bean id="dome" class="com.hzh.ioc.Test">
+        <constructor-arg name="name" value="牛头马面"> </constructor-arg>
+       <!--  <property name="" value=""></property> set注入-->
+        </bean>
+        
+        <!-- 对象类型注入 -->
+        <bean id="dao" class="com.hzh.ioc.bookdao"></bean>
+        <bean id="ser" class="com.hzh.ioc.bookser">
+        <property name="bookdao" ref="dao"></property>
+        </bean>
+        <!-- p空间注入 -->
+        <bean id="ptest" class="com.hzh.ioc.Ptest" p:name="张三"></bean>
+        <!-- 注入复杂属性 -->
+        <bean id="compex" class="com.hzh.ioc.complex">
+        <property name="array">
+        <list>
+        <value>李染</value>
+        <value>山山</value>
+        <value>墨罔</value>
+        </list>
+        </property>
+        <property name="map">
+        <map>
+        <entry key="1" value="水果"></entry>
+        <entry key="2" value="植物"></entry>
+        </map>
+        </property>
+        <property name="list">
+        <list>
+        <value>想你</value>
+        <value>想我</value>
+        <value>想他</value>
+        </list>
+        </property>
+        
+        </bean>
+        
+</beans>
+        

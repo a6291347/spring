@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        <!--开启注解扫描  context:component-scan  base-package注解包的位置 可以使用，添加不同包  可以搭配xml一同使用  --> 
+        <context:component-scan base-package="com.hzh.zhujie"></context:component-scan>
+        <bean id="bookser" class="com.hzh.zhujie.bookser"></bean>
+        <bean id="bookdaoi" class="com.hzh.zhujie.bookdaoi"></bean>
+        <bean id="bookdaor" class="com.hzh.zhujie.bookdaor"></bean>
+		<!-- <context:annotation-config></context:annotation-config> 只扫描属性上面是否存在注解-->
+	
+</beans>

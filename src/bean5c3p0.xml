@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- 配置c3po连接池属性 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+	<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/mybatis"></property>
+	<property name="user" value="root"></property>
+	<property name="password" value="123654"></property>
+	</bean>
+	<!--1.service中注入dao属性  -->
+	<bean id="userservice" class="com.hzh.c3po.UserService" >
+	<property name="user" ref="userdao"></property>
+    </bean>
+    <!--2.dao中注入jdbcTemplate  -->
+	<bean id="userdao" class="com.hzh.c3po.UserDao" >
+	<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+   <!--3.jdbcTemplate中注入c3p0连接池属性 
+   在jdbctemp中有属性DataSource 并且有实现方法ser
+    -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	<!-- 将datasuorce传入到模板对象中 -->
+	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+</beans>
